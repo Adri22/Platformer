@@ -15,10 +15,12 @@ public class Game extends Canvas implements Runnable {
 	private boolean running = false;
 	private Thread thread;
 
+	Timer t;
 	Handler handler;
 	Random rand = new Random();
 
 	private void init() {
+		t = new Timer();
 		handler = new Handler();
 
 		for (int i = 0; i < 5; i++) { // testing
@@ -40,31 +42,15 @@ public class Game extends Canvas implements Runnable {
 	public void run() {
 		init();
 		this.requestFocus();
-		long lastTime = System.nanoTime();
-		double amountOfTicks = 60.0;
-		double ns = 1000000000 / amountOfTicks;
-		double delta = 0;
-		long timer = System.currentTimeMillis();
-		int updates = 0;
-		int frames = 0;
+
 		while (running) {
-			long now = System.nanoTime();
-			delta += (now - lastTime) / ns;
-			lastTime = now;
-			while (delta >= 1) {
+			t.setNewTime();
+
+			while (t.checkDelta()) {
 				tick();
-				updates++;
-				delta--;
 			}
 			render();
-			frames++;
-
-			if (System.currentTimeMillis() - timer > 1000) {
-				timer += 1000;
-				System.out.println("FPS: " + frames + " TICKS: " + updates);
-				frames = 0;
-				updates = 0;
-			}
+			t.incrementFrames();
 		}
 	}
 
@@ -81,14 +67,14 @@ public class Game extends Canvas implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 
-		// draw stuff here
+		// ------- draw stuff here ----------
 
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());
 
 		handler.render(g);
 
-		// ---------------------
+		// ----------------------------------
 
 		g.dispose();
 		bs.show();
