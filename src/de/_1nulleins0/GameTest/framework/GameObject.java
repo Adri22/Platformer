@@ -1,6 +1,7 @@
 package de._1nulleins0.GameTest.framework;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.LinkedList;
 
 public abstract class GameObject {
@@ -8,6 +9,8 @@ public abstract class GameObject {
 	protected float x, y;
 	protected float velX = 0, velY = 0;
 	protected ObjectID id;
+	protected boolean falling = true;
+	protected boolean jumping = false;
 
 	public GameObject(float x, float y, ObjectID id) {
 		this.x = x;
@@ -19,22 +22,58 @@ public abstract class GameObject {
 
 	public abstract void render(Graphics g);
 
-	public abstract float getX();
+	public abstract Rectangle getBounds();
 
-	public abstract float getY();
+	public boolean isFalling() {
+		return falling;
+	}
 
-	public abstract void setX(float x);
+	public void setFalling(boolean falling) {
+		this.falling = falling;
+	}
 
-	public abstract void setY(float y);
+	public boolean isJumping() {
+		return jumping;
+	}
 
-	public abstract float getVelX();
+	public void setJumping(boolean jumping) {
+		this.jumping = jumping;
+	}
 
-	public abstract float getVelY();
+	public float getX() {
+		return x;
+	};
 
-	public abstract void setVelX(float velX);
+	public float getY() {
+		return y;
+	};
 
-	public abstract void setVelY(float velY);
+	public void setX(float x) {
+		this.x = x;
+	};
 
-	public abstract ObjectID getID();
+	public void setY(float y) {
+		this.y = y;
+	};
+
+	public float getVelX() {
+		return velX;
+	};
+
+	public float getVelY() {
+		return velY;
+	};
+
+	public void setVelX(float velX) {
+		this.velX = velX;
+	};
+
+	public void setVelY(float velY) {
+		this.velY = velY;
+	};
+
+	public ObjectID getID() {
+		return id;
+	};
 
 }

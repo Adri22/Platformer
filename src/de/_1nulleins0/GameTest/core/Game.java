@@ -4,10 +4,9 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.Random;
 
 import de._1nulleins0.GameTest.framework.ObjectID;
-import de._1nulleins0.GameTest.objects.Test;
+import de._1nulleins0.GameTest.objects.Player;
 
 public class Game extends Canvas implements Runnable {
 
@@ -15,18 +14,23 @@ public class Game extends Canvas implements Runnable {
 	private boolean running = false;
 	private Thread thread;
 
+	public static int WIDTH;
+	public static int HEIGHT;
+	
 	Timer t;
 	Handler handler;
-	Random rand = new Random();
+	// Random rand = new Random();
 
 	private void init() {
+		
+		WIDTH = getWidth();
+		HEIGHT = getHeight();
+		
 		t = new Timer();
 		handler = new Handler();
-
-		for (int i = 0; i < 5; i++) { // testing
-			handler.addObject(new Test(rand.nextInt(800), rand.nextInt(600),
-					ObjectID.Test));
-		}
+		
+		handler.addObject(new Player(100, 100, ObjectID.Player));
+		handler.createLevel();
 	}
 
 	public synchronized void start() {
