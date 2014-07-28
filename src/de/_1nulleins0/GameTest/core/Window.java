@@ -1,4 +1,4 @@
-package de._1nulleins0.GameTest.window;
+package de._1nulleins0.GameTest.core;
 
 import java.awt.Dimension;
 
