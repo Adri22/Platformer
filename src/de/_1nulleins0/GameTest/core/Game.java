@@ -5,86 +5,90 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import de._1nulleins0.GameTest.framework.KeyInput;
 import de._1nulleins0.GameTest.framework.ObjectID;
 import de._1nulleins0.GameTest.objects.Player;
 
 public class Game extends Canvas implements Runnable {
 
-	private static final long serialVersionUID = -850345177889691148L;
-	private boolean running = false;
-	private Thread thread;
+    private static final long serialVersionUID = -850345177889691148L;
+    private boolean running = false;
+    private Thread thread;
 
-	public static int WIDTH;
-	public static int HEIGHT;
+    public static int WIDTH;
+    public static int HEIGHT;
+
+    Timer t;
+    Handler handler;
+
+    // Random rand = new Random();
+
+    private void init() {
+
+	WIDTH = getWidth();
+	HEIGHT = getHeight();
+
+	t = new Timer();
+	handler = new Handler();
+
+	handler.addObject(new Player(100, 100, handler, ObjectID.Player));
+	handler.createLevel();
 	
-	Timer t;
-	Handler handler;
-	// Random rand = new Random();
+	this.addKeyListener(new KeyInput(handler));
+    }
 
-	private void init() {
-		
-		WIDTH = getWidth();
-		HEIGHT = getHeight();
-		
-		t = new Timer();
-		handler = new Handler();
-		
-		handler.addObject(new Player(100, 100, ObjectID.Player));
-		handler.createLevel();
+    public synchronized void start() {
+	if (running) {
+	    return;
 	}
 
-	public synchronized void start() {
-		if (running) {
-			return;
-		}
+	running = true;
+	thread = new Thread(this);
+	thread.start();
+    }
 
-		running = true;
-		thread = new Thread(this);
-		thread.start();
+    public void run() {
+	init();
+	this.requestFocus();
+
+	while (running) {
+	    t.setNewTime();
+
+	    while (t.checkDelta()) {
+		tick();
+	    }
+	    render();
+	    t.incrementFrames();
+	}
+    }
+
+    private void tick() {
+	handler.tick();
+    }
+
+    private void render() {
+	BufferStrategy bs = this.getBufferStrategy();
+	if (bs == null) {
+	    this.createBufferStrategy(3);
+	    return;
 	}
 
-	public void run() {
-		init();
-		this.requestFocus();
+	Graphics g = bs.getDrawGraphics();
 
-		while (running) {
-			t.setNewTime();
+	// ------- draw stuff here ----------
 
-			while (t.checkDelta()) {
-				tick();
-			}
-			render();
-			t.incrementFrames();
-		}
-	}
+	g.setColor(Color.black);
+	g.fillRect(0, 0, getWidth(), getHeight());
 
-	private void tick() {
-		handler.tick();
-	}
+	handler.render(g);
 
-	private void render() {
-		BufferStrategy bs = this.getBufferStrategy();
-		if (bs == null) {
-			this.createBufferStrategy(3);
-			return;
-		}
+	// ----------------------------------
 
-		Graphics g = bs.getDrawGraphics();
+	g.dispose();
+	bs.show();
+    }
 
-		// ------- draw stuff here ----------
-
-		g.setColor(Color.black);
-		g.fillRect(0, 0, getWidth(), getHeight());
-
-		handler.render(g);
-
-		// ----------------------------------
-
-		g.dispose();
-		bs.show();
-	}
-
-	public static void main(String args[]) {
-		new Window(800, 600, "Test", new Game());
-	}
+    public static void main(String args[]) {
+	new Window(800, 600, "Test", new Game());
+    }
 }
