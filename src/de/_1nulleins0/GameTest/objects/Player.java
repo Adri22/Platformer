@@ -12,19 +12,18 @@ import de._1nulleins0.GameTest.framework.ObjectID;
 
 public class Player extends GameObject {
 
-    private float width = 48, height = 96;
     private float gravity = 0.5f;
     private final float MAX_SPEED = 10;
 
     private Handler handler;
 
     public Player(float x, float y, Handler handler, ObjectID id) {
-	super(x, y, id);
+	super(x, y, 48, 96, id);
 	this.handler = handler;
     }
 
     @Override
-    public void tick(LinkedList<GameObject> object) {
+    public void update(LinkedList<GameObject> object) {
 	x += velX;
 	y += velY;
 
@@ -44,11 +43,26 @@ public class Player extends GameObject {
 	    GameObject tempObject = handler.object.get(i);
 
 	    if (tempObject.getID() == ObjectID.Block) {
+		if (getBoundsTop().intersects(tempObject.getBounds())) {
+		    y = tempObject.getY() + tempObject.getHeight();
+		    velY = 0;
+		}
+		
 		if (getBounds().intersects(tempObject.getBounds())) {
 		    y = tempObject.getY() - height;
 		    velY = 0;
 		    falling = false;
 		    jumping = false;
+		} else {
+		    falling = true;
+		}
+		
+		if (getBoundsLeft().intersects(tempObject.getBounds())) {
+		    x = tempObject.getX() + tempObject.getWidth();
+		}
+		
+		if (getBoundsRight().intersects(tempObject.getBounds())) {
+		    x = tempObject.getX() - width;
 		}
 	    }
 	}

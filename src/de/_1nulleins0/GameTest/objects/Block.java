@@ -11,22 +11,22 @@ import de._1nulleins0.GameTest.framework.ObjectID;
 public class Block extends GameObject {
 
     public Block(float x, float y, ObjectID id) {
-	super(x, y, id);
+	super(x, y, 32, 32, id);
     }
 
     @Override
-    public void tick(LinkedList<GameObject> object) {
+    public void update(LinkedList<GameObject> object) {
     }
 
     @Override
     public void render(Graphics g) {
 	g.setColor(Color.white);
-	g.drawRect((int) x, (int) y, 32, 32);
+	g.drawRect((int) x, (int) y, (int) width, (int) height);
     }
 
     @Override
     public Rectangle getBounds() {
-	return new Rectangle((int) x, (int) y, 32, 32);
+	return new Rectangle((int) x, (int) y, (int) width, (int) height);
     }
 
 }

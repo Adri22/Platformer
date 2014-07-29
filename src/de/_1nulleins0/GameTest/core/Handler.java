@@ -11,10 +11,10 @@ public class Handler {
     public LinkedList<GameObject> object = new LinkedList<GameObject>();
     private GameObject tempObject;
 
-    public void tick() {
+    public void updateObjects() {
 	for (int i = 0; i < object.size(); i++) {
 	    tempObject = object.get(i);
-	    tempObject.tick(object);
+	    tempObject.update(object);
 	}
     }
 
@@ -34,8 +34,8 @@ public class Handler {
     }
 
     public void createLevel() {
-	for (int xx = 0; xx < Game.WIDTH + 32; xx += 32) { // testing
-	    addObject(new Block(xx, Game.HEIGHT - 32, ObjectID.Block));
+	for (int step = 0; step < Game.WIDTH + 32; step += 32) { // testing
+	    addObject(new Block(step, Game.HEIGHT - 32, ObjectID.Block));
 	}
     }
 }

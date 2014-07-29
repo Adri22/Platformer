@@ -6,19 +6,22 @@ import java.util.LinkedList;
 
 public abstract class GameObject {
 
+    protected float width, height;
     protected float x, y;
     protected float velX = 0, velY = 0;
     protected ObjectID id;
     protected boolean falling = true;
     protected boolean jumping = false;
 
-    public GameObject(float x, float y, ObjectID id) {
+    public GameObject(float x, float y, float width, float height, ObjectID id) {
+	this.width = width;
+	this.height = height;
 	this.x = x;
 	this.y = y;
 	this.id = id;
     }
 
-    public abstract void tick(LinkedList<GameObject> object);
+    public abstract void update(LinkedList<GameObject> object);
 
     public abstract void render(Graphics g);
 
@@ -38,6 +41,22 @@ public abstract class GameObject {
 
     public void setJumping(boolean jumping) {
 	this.jumping = jumping;
+    }
+
+    public float getWidth() {
+	return width;
+    }
+
+    public void setWidth(int width) {
+	this.width = width;
+    }
+
+    public float getHeight() {
+	return height;
+    }
+
+    public void setHeight(int height) {
+	this.height = height;
     }
 
     public float getX() {
