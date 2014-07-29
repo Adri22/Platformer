@@ -1,13 +1,13 @@
-package de._1nulleins0.GameTest.core;
+package de._1nulleins0.PlatformerGame.core;
 
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import de._1nulleins0.GameTest.framework.KeyInput;
-import de._1nulleins0.GameTest.framework.ObjectID;
-import de._1nulleins0.GameTest.objects.Player;
+import de._1nulleins0.PlatformerGame.framework.KeyInput;
+import de._1nulleins0.PlatformerGame.framework.ObjectID;
+import de._1nulleins0.PlatformerGame.objects.Player;
 
 public class Game extends Canvas implements Runnable {
 
@@ -20,8 +20,6 @@ public class Game extends Canvas implements Runnable {
 
     Timer t;
     Handler handler;
-
-    // Random rand = new Random();
 
     private void init() {
 
@@ -89,6 +87,6 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void main(String args[]) {
-	new Window(800, 600, "Test", new Game());
+	new Window(1024, 768, "Platformer", new Game());
     }
 }

@@ -1,11 +1,11 @@
-package de._1nulleins0.GameTest.core;
+package de._1nulleins0.PlatformerGame.core;
 
 import java.awt.Graphics;
 import java.util.LinkedList;
 
-import de._1nulleins0.GameTest.framework.GameObject;
-import de._1nulleins0.GameTest.framework.ObjectID;
-import de._1nulleins0.GameTest.objects.Block;
+import de._1nulleins0.PlatformerGame.framework.GameObject;
+import de._1nulleins0.PlatformerGame.framework.ObjectID;
+import de._1nulleins0.PlatformerGame.objects.Block;
 
 public class Handler {
     public LinkedList<GameObject> object = new LinkedList<GameObject>();

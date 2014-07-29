@@ -1,4 +1,4 @@
-package de._1nulleins0.GameTest.framework;
+package de._1nulleins0.PlatformerGame.framework;
 
 public enum ObjectID {
 

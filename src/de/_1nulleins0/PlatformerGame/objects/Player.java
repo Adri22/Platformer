@@ -1,4 +1,4 @@
-package de._1nulleins0.GameTest.objects;
+package de._1nulleins0.PlatformerGame.objects;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,9 +6,9 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
-import de._1nulleins0.GameTest.core.Handler;
-import de._1nulleins0.GameTest.framework.GameObject;
-import de._1nulleins0.GameTest.framework.ObjectID;
+import de._1nulleins0.PlatformerGame.core.Handler;
+import de._1nulleins0.PlatformerGame.framework.GameObject;
+import de._1nulleins0.PlatformerGame.framework.ObjectID;
 
 public class Player extends GameObject {
 

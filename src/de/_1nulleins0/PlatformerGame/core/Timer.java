@@ -1,4 +1,4 @@
-package de._1nulleins0.GameTest.core;
+package de._1nulleins0.PlatformerGame.core;
 
 public class Timer {
 

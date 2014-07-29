@@ -1,9 +1,9 @@
-package de._1nulleins0.GameTest.framework;
+package de._1nulleins0.PlatformerGame.framework;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import de._1nulleins0.GameTest.core.Handler;
+import de._1nulleins0.PlatformerGame.core.Handler;
 
 public class KeyInput extends KeyAdapter {
 
