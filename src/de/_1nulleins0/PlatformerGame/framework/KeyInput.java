@@ -19,18 +19,36 @@ public class KeyInput extends KeyAdapter {
 	for (int i = 0; i < handler.object.size(); i++) {
 	    GameObject tempObject = handler.object.get(i);
 
-	    if (tempObject.getID() == ObjectID.Player) {
-		if (key == KeyEvent.VK_D) {
-		    tempObject.setVelX(5);
-		}
-		if (key == KeyEvent.VK_A) {
-		    tempObject.setVelX(-5);
-		}
-		if (key == KeyEvent.VK_SPACE && !tempObject.isJumping()) {
-		    tempObject.setJumping(true);
-		    tempObject.setVelY(-10);
-		}
+	    switch (tempObject.getID()) {
+		case Player:
+		    switch (key) {
+			case KeyEvent.VK_D:
+			    tempObject.setVelX(5);
+			    break;
+			case KeyEvent.VK_A:
+			    tempObject.setVelX(-5);
+			    break;
+			case KeyEvent.VK_SPACE:
+			    if (!tempObject.isJumping()) {
+				tempObject.setJumping(true);
+				tempObject.setVelY(-10);
+				break;
+			    }
+			default:
+			    break;
+		    }
+		    break;
+		default:
+		    break;
 	    }
+
+	    /*
+	     * if (tempObject.getID() == ObjectID.Player) { if (key ==
+	     * KeyEvent.VK_D) { tempObject.setVelX(5); } if (key ==
+	     * KeyEvent.VK_A) { tempObject.setVelX(-5); } if (key ==
+	     * KeyEvent.VK_SPACE && !tempObject.isJumping()) {
+	     * tempObject.setJumping(true); tempObject.setVelY(-10); } }
+	     */
 	}
 
 	if (key == KeyEvent.VK_ESCAPE) {
@@ -44,14 +62,26 @@ public class KeyInput extends KeyAdapter {
 	for (int i = 0; i < handler.object.size(); i++) {
 	    GameObject tempObject = handler.object.get(i);
 
-	    if (tempObject.getID() == ObjectID.Player) {
-		if (key == KeyEvent.VK_D) {
-		    tempObject.setVelX(0);
-		}
-		if (key == KeyEvent.VK_A) {
-		    tempObject.setVelX(0);
-		}
+	    switch (tempObject.getID()) {
+		case Player:
+		    switch (key) {
+			case KeyEvent.VK_D:
+			case KeyEvent.VK_A:
+			    tempObject.setVelX(0);
+			    break;
+			default:
+			    break;
+		    }
+		    break;
+		default:
+		    break;
 	    }
+
+	    /*
+	     * if (tempObject.getID() == ObjectID.Player) { if (key ==
+	     * KeyEvent.VK_D) { tempObject.setVelX(0); } if (key ==
+	     * KeyEvent.VK_A) { tempObject.setVelX(0); } }
+	     */
 	}
     }
 }

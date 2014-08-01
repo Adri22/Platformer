@@ -42,29 +42,49 @@ public class Player extends GameObject {
 	for (int i = 0; i < handler.object.size(); i++) {
 	    GameObject tempObject = handler.object.get(i);
 
-	    if (tempObject.getID() == ObjectID.Block) {
-		if (getBoundsTop().intersects(tempObject.getBounds())) {
-		    y = tempObject.getY() + tempObject.getHeight();
-		    velY = 0;
-		}
-		
-		if (getBounds().intersects(tempObject.getBounds())) {
-		    y = tempObject.getY() - height;
-		    velY = 0;
-		    falling = false;
-		    jumping = false;
-		} else {
-		    falling = true;
-		}
-		
-		if (getBoundsLeft().intersects(tempObject.getBounds())) {
-		    x = tempObject.getX() + tempObject.getWidth();
-		}
-		
-		if (getBoundsRight().intersects(tempObject.getBounds())) {
-		    x = tempObject.getX() - width;
-		}
+	    switch (tempObject.getID()) {
+		case Block:
+		    if (getBoundsTop().intersects(tempObject.getBounds())) {
+			y = tempObject.getY() + tempObject.getHeight();
+			velY = 0;
+		    }
+
+		    if (getBounds().intersects(tempObject.getBounds())) {
+			y = tempObject.getY() - height;
+			velY = 0;
+			falling = false;
+			jumping = false;
+		    } else {
+			falling = true;
+		    }
+
+		    if (getBoundsLeft().intersects(tempObject.getBounds())) {
+			x = tempObject.getX() + tempObject.getWidth();
+		    }
+
+		    if (getBoundsRight().intersects(tempObject.getBounds())) {
+			x = tempObject.getX() - width;
+		    }
+		    break;
+		default:
+		    break;
 	    }
+
+	    /*
+	     * if (tempObject.getID() == ObjectID.Block) { if
+	     * (getBoundsTop().intersects(tempObject.getBounds())) { y =
+	     * tempObject.getY() + tempObject.getHeight(); velY = 0; }
+	     * 
+	     * if (getBounds().intersects(tempObject.getBounds())) { y =
+	     * tempObject.getY() - height; velY = 0; falling = false; jumping =
+	     * false; } else { falling = true; }
+	     * 
+	     * if (getBoundsLeft().intersects(tempObject.getBounds())) { x =
+	     * tempObject.getX() + tempObject.getWidth(); }
+	     * 
+	     * if (getBoundsRight().intersects(tempObject.getBounds())) { x =
+	     * tempObject.getX() - width; } }
+	     */
 	}
     }
 
