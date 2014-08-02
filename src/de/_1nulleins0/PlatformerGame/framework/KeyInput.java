@@ -41,14 +41,6 @@ public class KeyInput extends KeyAdapter {
 		default:
 		    break;
 	    }
-
-	    /*
-	     * if (tempObject.getID() == ObjectID.Player) { if (key ==
-	     * KeyEvent.VK_D) { tempObject.setVelX(5); } if (key ==
-	     * KeyEvent.VK_A) { tempObject.setVelX(-5); } if (key ==
-	     * KeyEvent.VK_SPACE && !tempObject.isJumping()) {
-	     * tempObject.setJumping(true); tempObject.setVelY(-10); } }
-	     */
 	}
 
 	if (key == KeyEvent.VK_ESCAPE) {
@@ -76,12 +68,6 @@ public class KeyInput extends KeyAdapter {
 		default:
 		    break;
 	    }
-
-	    /*
-	     * if (tempObject.getID() == ObjectID.Player) { if (key ==
-	     * KeyEvent.VK_D) { tempObject.setVelX(0); } if (key ==
-	     * KeyEvent.VK_A) { tempObject.setVelX(0); } }
-	     */
 	}
     }
 }
