@@ -39,8 +39,8 @@ public class Player extends GameObject {
     }
 
     private void collision(LinkedList<GameObject> object) {
-	for (int i = 0; i < handler.object.size(); i++) {
-	    GameObject tempObject = handler.object.get(i);
+	for (int i = 0; i < handler.objects.size(); i++) {
+	    GameObject tempObject = handler.objects.get(i);
 
 	    switch (tempObject.getID()) {
 		case Block:

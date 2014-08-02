@@ -3,6 +3,7 @@ package de._1nulleins0.PlatformerGame.core;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import de._1nulleins0.PlatformerGame.framework.KeyInput;
@@ -20,6 +21,7 @@ public class Game extends Canvas implements Runnable {
 
     Timer t;
     Handler handler;
+    Camera cam;
 
     private void init() {
 
@@ -28,10 +30,11 @@ public class Game extends Canvas implements Runnable {
 
 	t = new Timer();
 	handler = new Handler();
+	cam = new Camera(0, 0);
 
 	handler.addObject(new Player(100, 100, handler, ObjectID.Player));
 	handler.createLevel();
-	
+
 	this.addKeyListener(new KeyInput(handler));
     }
 
@@ -53,15 +56,23 @@ public class Game extends Canvas implements Runnable {
 	    t.setNewTime();
 
 	    while (t.checkDelta()) {
-		tick();
+		updateGame();
 	    }
 	    render();
 	    t.incrementFrames();
 	}
     }
 
-    private void tick() {
+    private void updateGame() {
 	handler.updateObjects();
+
+	for (int i = 0; i < handler.objects.size(); i++) {
+	    if (handler.objects.get(i).getID() == ObjectID.Player) {
+		cam.updateCam(handler.objects.get(i));
+	    }
+
+	}
+
     }
 
     private void render() {
@@ -72,13 +83,18 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	Graphics g = bs.getDrawGraphics();
+	Graphics2D g2d = (Graphics2D) g;
 
 	// ------- draw stuff here ----------
 
 	g.setColor(Color.black);
 	g.fillRect(0, 0, getWidth(), getHeight());
 
+	g2d.translate(cam.getX(), cam.getY());
+
 	handler.render(g);
+
+	g2d.translate(-cam.getX(), -cam.getY());
 
 	// ----------------------------------
 
