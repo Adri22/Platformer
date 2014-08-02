@@ -29,6 +29,7 @@ public class Camera {
 
     public void updateCam(GameObject player) {
 	x = -player.getX() + Game.WIDTH / 2;
+	y = -player.getY() + Game.HEIGHT / 2;
     }
 
 }
