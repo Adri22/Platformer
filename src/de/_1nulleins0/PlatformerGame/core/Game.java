@@ -64,7 +64,7 @@ public class Game extends Canvas implements Runnable {
 	    while (t.checkDelta()) {
 		updateGame();
 	    }
-	    render();
+	    renderGame();
 	    t.incrementFrames();
 	}
     }
@@ -76,11 +76,10 @@ public class Game extends Canvas implements Runnable {
 	    if (handler.objects.get(i).getID() == ObjectID.Player) {
 		cam.updateCam(handler.objects.get(i));
 	    }
-
 	}
     }
 
-    private void render() {
+    private void renderGame() {
 	BufferStrategy bs = this.getBufferStrategy();
 
 	if (bs == null) {
@@ -96,7 +95,7 @@ public class Game extends Canvas implements Runnable {
 
 	g2d.translate(cam.getX(), cam.getY());
 
-	handler.render(g);
+	handler.renderObjects(g);
 
 	g2d.translate(-cam.getX(), -cam.getY());
 
