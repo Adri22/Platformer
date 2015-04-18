@@ -2,7 +2,6 @@ package de._1nulleins0.PlatformerGame.core;
 
 import java.awt.Graphics;
 import java.util.LinkedList;
-
 import de._1nulleins0.PlatformerGame.framework.GameObject;
 
 public class Handler {

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
-
 import de._1nulleins0.PlatformerGame.framework.GameObject;
 import de._1nulleins0.PlatformerGame.framework.ObjectID;
 

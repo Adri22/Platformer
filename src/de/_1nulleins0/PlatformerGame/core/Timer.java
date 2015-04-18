@@ -2,15 +2,25 @@ package de._1nulleins0.PlatformerGame.core;
 
 public class Timer {
 
-    private long lastTime = System.nanoTime();
-    private double amountOfTicks = 60.0;
-    private double ns = 1000000000 / amountOfTicks;
-    private double delta = 0;
-    private long timer = System.currentTimeMillis();
-    private int frames = 0;
-    private int updates = 0;
+    private long timer;
+    private long lastTime;
+    private long now;
+    private double amountOfTicks;
+    private double nanoseconds;
+    private double deltaTime;
+    private int fps;
 
-    private boolean checkMillis() {
+    public Timer() {
+	timer = System.currentTimeMillis();
+	lastTime = System.nanoTime();
+	now = 0;
+	amountOfTicks = 60.0;
+	nanoseconds = 1000000000 / amountOfTicks;
+	deltaTime = 0;
+	fps = 0;
+    }
+
+    private boolean checkLapsedMillis() {
 	if (System.currentTimeMillis() - timer > 1000) {
 	    return true;
 	} else {
@@ -19,15 +29,14 @@ public class Timer {
     }
 
     public void setNewTime() {
-	long now = System.nanoTime();
-	delta += (now - lastTime) / ns;
+	now = System.nanoTime();
+	deltaTime += (now - lastTime) / nanoseconds;
 	lastTime = now;
     }
 
     public boolean checkDelta() {
-	if (delta >= 1) {
-	    updates++;
-	    delta--;
+	if (deltaTime >= 1) {
+	    deltaTime--;
 	    return true;
 	} else {
 	    return false;
@@ -35,12 +44,15 @@ public class Timer {
     }
 
     public void incrementFrames() {
-	frames++;
-	if (checkMillis()) {
-	    System.out.println("FPS: " + frames + " TICKS: " + updates);
+	fps++;
+	if (checkLapsedMillis()) {
+	    System.out.println("FPS: " + fps);
 	    timer += 1000;
-	    frames = 0;
-	    updates = 0;
+	    fps = 0;
 	}
+    }
+
+    public int getFPS() {
+	return fps;
     }
 }

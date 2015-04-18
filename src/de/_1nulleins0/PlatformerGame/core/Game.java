@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-
 import de._1nulleins0.PlatformerGame.framework.KeyInput;
 import de._1nulleins0.PlatformerGame.framework.ObjectID;
 import de._1nulleins0.PlatformerGame.objects.Block;
@@ -61,7 +60,7 @@ public class Game extends Canvas implements Runnable {
 	while (running) {
 	    t.setNewTime();
 
-	    while (t.checkDelta()) {
+	    if (t.checkDelta()) {
 		updateGame();
 	    }
 	    renderGame();

@@ -1,7 +1,6 @@
 package de._1nulleins0.PlatformerGame.core;
 
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
 
 public class Window {
